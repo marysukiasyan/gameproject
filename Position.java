@@ -1,4 +1,3 @@
-package gameproject.gameproject;
 
 public class Position {
     private int row;
