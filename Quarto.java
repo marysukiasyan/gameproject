@@ -1,4 +1,3 @@
-
 public class Quarto {
 
     public static final int BOARD_RANKS = 4;
@@ -31,6 +30,83 @@ public class Quarto {
     }
 
     public boolean isGameOver() {
+        // check horizontal
+        for (int i = 0; i < 4; i++) {
+            if (this.board[i][0].getColor() == this.board[i][1].getColor() &&
+                    this.board[i][0].getColor() == this.board[i][2].getColor() &&
+                    this.board[i][0].getColor() == this.board[i][3].getColor()
+            )
+                return true;
+            if (this.board[i][0].isHole() == this.board[i][1].isHole() &&
+                    this.board[i][0].isHole() == this.board[i][2].isHole() &&
+                    this.board[i][0].isHole() == this.board[i][3].isHole())
+                return true;
+            if (this.board[i][0].isTall() == this.board[i][1].isTall() &&
+                    this.board[i][0].isTall() == this.board[i][2].isTall() &&
+                    this.board[i][0].isTall() == this.board[i][3].isTall())
+                return true;
+            if (this.board[i][0].isSquare() == this.board[i][1].isSquare() &&
+                    this.board[i][0].isSquare() == this.board[i][2].isSquare() &&
+                    this.board[i][0].isSquare() == this.board[i][3].isSquare())
+                return true;
+        }
+            //check verticals
+        for (int j = 0; j < 4; j++) {
+                if (this.board[0][j].getColor() == this.board[1][j].getColor() &&
+                        this.board[0][j].getColor() == this.board[2][j].getColor() &&
+                        this.board[0][j].getColor() == this.board[3][j].getColor()
+                )
+                    return true;
+                if (this.board[0][j].isHole() == this.board[1][j].isHole() &&
+                        this.board[0][j].isHole() == this.board[2][j].isHole() &&
+                        this.board[0][j].isHole() == this.board[3][j].isHole())
+                    return true;
+                if (this.board[0][j].isTall() == this.board[1][j].isTall() &&
+                        this.board[0][j].isTall() == this.board[2][j].isTall() &&
+                        this.board[0][j].isTall() == this.board[3][j].isTall())
+                    return true;
+            if (this.board[0][j].isSquare() == this.board[1][j].isSquare() &&
+                    this.board[0][j].isSquare() == this.board[2][j].isSquare() &&
+                    this.board[0][j].isSquare() == this.board[3][j].isSquare())
+                return true;
+        }
+        //check diagonals
+        if (this.board[0][0].getColor() == this.board[1][1].getColor() &&
+                this.board[0][0].getColor() == this.board[2][2].getColor() &&
+                this.board[0][0].getColor() == this.board[3][3].getColor()
+        )
+            return true;
+        if (this.board[0][0].isHole() == this.board[1][1].isHole() &&
+                this.board[0][0].isHole() == this.board[2][2].isHole() &&
+                this.board[0][0].isHole() == this.board[3][2].isHole())
+            return true;
+        if (this.board[0][0].isTall() == this.board[1][1].isTall() &&
+                this.board[0][0].isTall() == this.board[2][2].isTall() &&
+                this.board[0][0].isTall() == this.board[3][3].isTall())
+            return true;
+        if (this.board[0][0].isSquare() == this.board[1][1].isSquare() &&
+                this.board[0][0].isSquare() == this.board[2][2].isSquare() &&
+                this.board[0][0].isSquare() == this.board[3][3].isSquare())
+            return true;
+
+        if (this.board[0][3].getColor() == this.board[1][3].getColor() &&
+                this.board[0][3].getColor() == this.board[2][2].getColor() &&
+                this.board[0][3].getColor() == this.board[0][3].getColor()
+        )
+            return true;
+        if (this.board[0][3].isHole() == this.board[1][3].isHole() &&
+                this.board[0][3].isHole() == this.board[2][2].isHole() &&
+                this.board[0][3].isHole() == this.board[0][3].isHole())
+            return true;
+        if (this.board[0][3].isTall() == this.board[1][3].isTall() &&
+                this.board[0][3].isTall() == this.board[2][2].isTall() &&
+                this.board[0][3].isTall() == this.board[0][3].isTall())
+            return true;
+        if (this.board[0][3].isSquare() == this.board[1][3].isSquare() &&
+                this.board[0][3].isSquare() == this.board[2][2].isSquare() &&
+                this.board[0][3].isSquare() == this.board[0][3].isSquare())
+            return true;
+
         return false;
 
     }
