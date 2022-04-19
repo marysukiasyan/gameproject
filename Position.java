@@ -1,10 +1,12 @@
+package gameproject.gameproject;
+
 public class Position {
     private int row;
     private int column;
 
     public Position(int row, int column) {
-        this.row = row;
-        this.column = column;
+        this.setRow(row);
+        this.setColumn(column);
     }
 
     public Position() {
@@ -38,6 +40,6 @@ public class Position {
 
 
     public String toString() {
-        return (row+1) +", "+(column+1)+"";
+        return (row) +", "+(column)+"";
     }
 }
