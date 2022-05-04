@@ -46,5 +46,9 @@ public class Figure {
         }
     }
 
+    public String toString(){
+        return " qar";
+    }
+
 
 }
