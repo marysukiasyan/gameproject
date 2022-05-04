@@ -2,7 +2,7 @@ package gameproject.gameproject;
 
 import java.util.ArrayList;
 
-public class AvailableFigures  {
+public class AvailableFigures {
 
     private  ArrayList<Figure> availableFigures;
 
@@ -43,6 +43,7 @@ public class AvailableFigures  {
 
     public Figure returnRemovedFigure(int index){
         return availableFigures.remove(index);
+
     }
 
     @Override
