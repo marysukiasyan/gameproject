@@ -24,15 +24,17 @@ public class ConsoleQuarto {
         while (!game.isGameOver()){
             System.out.println("The Board");
             System.out.println();
-            for (int i = 0; i  < Quarto.BOARD_ROWS; i++){
-                for (int j = 0; j < Quarto.BOARD_COLUMNS; j++){
-                    if (this.game.getBoard()[i][j] == null)
-                        System.out.print((i+1) + "" + (j+1) + "        ");
-                    else
-                        System.out.println(this.game.getBoard()[i][j] + " " );
-                }
-                System.out.println();
-            }
+            game.printBoard();
+//            for (int i = 0; i  < Quarto.BOARD_ROWS; i++){
+//                for (int j = 0; j < Quarto.BOARD_COLUMNS; j++){
+//                    if (this.game.getBoard()[i][j] == null)
+//
+//                        System.out.printf("%10s",(i+1)+ ""+(j+1));
+//                    else
+//                        System.out.printf("%10s",this.game.getBoard()[i][j] + " " );
+//                }
+//                System.out.println();
+//            }
             System.out.println();
             System.out.println("Available figures \n");
             figures.printAvailableFigures();
@@ -61,6 +63,7 @@ public class ConsoleQuarto {
             //System.out.println(Arrays.deepToString(game.getBoard()));
         }
         System.out.println(game.getTurn() + " won");
+        game.printBoard();
 
     }
 
