@@ -128,13 +128,13 @@ public class Quarto implements Cloneable {
      * @return
      */
     public Figure[][] getBoard() {
-//        Figure[][] copy = new Figure[BOARD_RANKS][BOARD_FILES];
-//        for (int i = 0; i < BOARD_RANKS; i++)
-//            for (int j = 0; j < BOARD_FILES; j++)
-//                if (this.board[i][j] != null)
-//                    copy[i][j] = (Figure) this.board[i][j].clone();
-//        return copy;
-        return this.board;
+        Figure[][] copy = new Figure[BOARD_ROWS][BOARD_COLUMNS];
+        for (int i = 0; i < BOARD_ROWS; i++)
+            for (int j = 0; j < BOARD_COLUMNS; j++)
+                if (this.board[i][j] != null)
+                    copy[i][j] = (Figure) this.board[i][j].clone();
+        return copy;
+//        return this.board;
     }
 
     /**
@@ -290,5 +290,18 @@ public class Quarto implements Cloneable {
     @Override
     public String toString() {
         return "" + Arrays.deepToString(board);
+    }
+
+    public  void printBoard(){
+        for (int i = 0; i  < Quarto.BOARD_ROWS; i++){
+            for (int j = 0; j < Quarto.BOARD_COLUMNS; j++){
+                if (board[i][j] == null)
+
+                    System.out.printf("%10s",(i+1)+ ""+(j+1));
+                else
+                    System.out.printf("%10s",board[i][j] + " " );
+            }
+            System.out.println();
+        }
     }
 }
