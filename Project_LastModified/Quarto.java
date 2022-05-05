@@ -1,79 +1,180 @@
-package gameproject.gameproject;
+package game;
 
 import java.util.Arrays;
 
-public class Quarto {
+/**
+ * A class that stores the board for the game and other methods that have been used to create it.
+ * @author Hripsime Melikyan
+ * @author Meri Sukiasya
+ * @author Arthur Aghamyan
+ */
 
-    public static final int BOARD_RANKS = 4;
-    public static final int BOARD_FILES = 4;
+public class Quarto implements Cloneable {
+
+    /**
+     * A static instance variable that initializes the size of the Quarto board.
+     */
+
+    public static final int BOARD_ROWS = 4;
+
+    /**
+     * A static instance variable that initializes the size of the Quarto board.
+     */
+
+    public static final int BOARD_COLUMNS = 4;
+
+    /**
+     * The board of the game, which have a figure type.
+     */
+
     private Figure[][] board;
-    public enum FigureColor {WHITE, BLACK};
+
+    /**
+     * The two possible colors of the figures of Quarto game.
+     */
+
+    public enum FigureColor {RED, BLUE};
     public FigureColor figureColors;
-    //private int numberOfMoves =0;
-    public static final String PLAYER1 = "Player 1";
-    public static final String PLAYER2 = "Player 2";
+    //    public static final String PLAYER1 = "Player 1";
+    //    public static final String PLAYER2 = "Player 2";
+
+    /**
+     * The name of the first player.
+     */
+
+    private String Player1 = "Player 1";
+
+    /**
+     * The name of the second player.
+     */
+
+    private String Player2 = "Player 2";
+
+    /**
+     * The number of turns.
+     */
+
     private int turn = 0;
 
-    public Quarto() {
+    /**
+     * A constructor that receives and initializes the names of the players.
+     * It also initializes the board and turns.
+     * @param player1
+     * @param player2
+     */
+
+    public Quarto(String player1,String player2) {
         this("----" +
                         "----" +
                         "----" +
                         "----" );
     //    board[1][2] = new Figure();
         this.turn = 0;
+        this.board = new Figure[BOARD_ROWS][BOARD_COLUMNS];
+        this.Player1 = player1;
+        this.Player2 = player2;
+    }
+
+    /**
+     * An accessor to get first players name.
+     * @return
+     */
+
+    public String getPlayer1() {
+        return Player1;
+    }
+
+    /**
+     * An accessor to get second players name.
+     * @return
+     */
+
+    public String getPlayer2() {
+        return Player2;
     }
 
 
-   //  no-arg constructor to automatically initialize the board
+    /**
+     * A no arg constructor that initializes the board
+     * @param arrangement
+     */
+
     public Quarto(String arrangement) {
-        this.board = new Figure[BOARD_RANKS][BOARD_FILES];
-//        for (int i = 0; i < arrangement.length(); i++) {
-//            switch (arrangement.charAt(i)){
-//
-//            }
+        this.board = new Figure[BOARD_ROWS][BOARD_COLUMNS];
 
         }
-//        for (int i = 0; i < BOARD_RANKS; i++)
-//            for (int j = 0; j < BOARD_FILES; j++)
-//                this.board[i][j] = "";
-//    }
+
+    /**
+     * A mutator to increase the number of turns with 1.
+     */
 
     public void increaseTurn(){
         turn += 1;
     }
 
+    /**
+     * A method that gives the name of the player whos turn has come.
+     * @return
+     */
+
     public String  getTurn(){
         if (turn % 2 ==0)
-            return PLAYER1;
-        return PLAYER2;
+            return this.getPlayer1();
+        return this.getPlayer2();
     }
 
-
-
+    /**
+     * An accessor for the board.
+     * @return
+     */
     public Figure[][] getBoard() {
-        //returns deep copy
-        /*
-        Figure[][] board = new Figure[BOARD_RANKS][BOARD_FILES];
-        for (int i = 0; i < BOARD_RANKS; i++)
-            for (int j = 0; j < BOARD_FILES; j++)
-                this.board[i][j] = new Figure();
-
-         */
-        return this.board;
+        Figure[][] copy = new Figure[BOARD_ROWS][BOARD_COLUMNS];
+        for (int i = 0; i < BOARD_ROWS; i++)
+            for (int j = 0; j < BOARD_COLUMNS; j++)
+                if (this.board[i][j] != null)
+                    copy[i][j] = (Figure) this.board[i][j].clone();
+        return copy;
+//        return this.board;
     }
 
-    // copy new board = this.board
-//    public boolean isEmpty(Position p){
- //       return this.board[p.getRow()][p.getColumn()] == new Figure();
-//    }
-
-    public Figure[][] addFigureToBoard(int row,int column, Figure figure){
-        if (row >= 0 && column < 4){
-            board[row][column] = figure;
+    /**
+     * An overridden clone method.
+     * @return
+     */
+    public Quarto clone() {
+        try {
+            Quarto copy = (Quarto) super.clone();
+            copy.board = this.getBoard();
+            return copy;
+        } catch (CloneNotSupportedException e) {
+            return null;
         }
-        return board;
     }
 
+
+    /**
+     * A method that given the position and figure appends the figure to the given position of the board.
+     * @param p
+     * @param figure
+     * @return
+     */
+
+    public Figure[][] addFigureToBoard(Position p, Figure figure){
+        if ((p.getRow() >= 0 && p.getColumn() < BOARD_COLUMNS) ||
+                (p.getColumn() >= 0 && p.getRow() < BOARD_ROWS)
+                        && board[p.getRow()][p.getColumn()] == null){
+                board[p.getRow()][p.getColumn()] = figure;
+            }
+            return board;
+        }
+
+
+    /**
+     * A method that given two coordinates of position in board checks whether it is empty or not.
+     * @param i
+     * @param j
+     * @return
+     */
 
     public boolean isEmpty(int i, int j){
         if (this.board[i][j] == null) {
@@ -82,11 +183,15 @@ public class Quarto {
         return false;
     }
 
+    /**
+     * A method that checks whether the game is ongoing or it is over and someone won.
+     * @return
+     */
+
     public boolean isGameOver() {
         // check horizontal
 
-
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < BOARD_ROWS; i++) {
             if (!isEmpty(i, 0) && !isEmpty(i, 1) && !isEmpty(i, 2) && !isEmpty(i, 3)) {
                 if (this.board[i][0].getColor() == this.board[i][1].getColor() &&
                         this.board[i][0].getColor().equals(this.board[i][2].getColor()) &&
@@ -109,7 +214,7 @@ public class Quarto {
             }
         }
             //check verticals
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < BOARD_COLUMNS; j++) {
             if (!isEmpty(0, j) && !isEmpty(1, j) && !isEmpty(2, j) && !isEmpty(3, j)) {
                 if (this.board[0][j].getColor() == this.board[1][j].getColor() &&
                         this.board[0][j].getColor() == this.board[2][j].getColor() &&
@@ -176,9 +281,27 @@ public class Quarto {
         return false;
     }
 
+    /**
+     * A method that prints string representation of board.
+     * @return
+     */
+
 
     @Override
     public String toString() {
         return "" + Arrays.deepToString(board);
+    }
+
+    public  void printBoard(){
+        for (int i = 0; i  < Quarto.BOARD_ROWS; i++){
+            for (int j = 0; j < Quarto.BOARD_COLUMNS; j++){
+                if (board[i][j] == null)
+
+                    System.out.printf("%10s",(i+1)+ ""+(j+1));
+                else
+                    System.out.printf("%10s",board[i][j] + " " );
+            }
+            System.out.println();
+        }
     }
 }
