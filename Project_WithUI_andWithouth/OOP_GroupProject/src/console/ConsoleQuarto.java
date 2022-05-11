@@ -1,6 +1,5 @@
 package console;
 
-import com.sun.source.tree.WhileLoopTree;
 import game.AvailableFigures;
 import game.Position;
 import game.Quarto;
@@ -71,18 +70,18 @@ public class ConsoleQuarto {
                 System.out.println("Congratulations " + game.getTurn() + " you won");
                 game.printBoard();
             }
-            else{
-            for (int i = 0; i < Quarto.BOARD_ROWS;i++){
-                for (int j = 0; j < Quarto.BOARD_COLUMNS;j++){
-                    if (game.getBoard()[i][j] != null){
-                        System.out.println("No one won, try again");
-                    }
-
-                }
-            }
-
-
-            }
+//            else {
+//            for (int i = 0; i < Quarto.BOARD_ROWS;i++){
+//                for (int j = 0; j < Quarto.BOARD_COLUMNS;j++){
+//                    if (game.getBoard()[i][j] != null){
+//                        System.out.println("No one won, try again");
+//                    }
+//
+//                }
+//            }
+//
+//
+//            }
         }
 
     }
