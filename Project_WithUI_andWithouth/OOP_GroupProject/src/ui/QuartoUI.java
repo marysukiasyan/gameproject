@@ -118,12 +118,13 @@ public class QuartoUI extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.print("I" + i + " ");
             System.out.println("J" + j);
-           label.setText(getTurn());
+
             if (game.getBoard()[i][j] == null) {
                 game.addFigureToBoard(new Position(i, j), figure);
                 setIcon(new ImageIcon(String.valueOf(img)));
                 figure = null;
                 img = null;
+                label.setText(getTurn());
             }
             buttonForFigure.setIcon(null);
             buttonForFigure.setBackground(Color.LIGHT_GRAY);
